@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.LocationStats;
 import com.example.demo.model.Resident;
 import com.example.demo.repo.ResidentRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,22 +36,20 @@ public class ResidentLocService {
         return residentRepository.findByLikeMuniCode(muniCode);
     }
 
-    public Integer findVbTrueResByBrgy(String brgyCode) {
-        return residentRepository.countResidentVbTrue(brgyCode);
+    public LocationStats findVbTrueResByBrgy(String brgyCode) {
+        LocationStats stats = new LocationStats(
+                residentRepository.countTotalByBrgy(brgyCode)
+                ,residentRepository.countTotalVbByBrgy(brgyCode));
+
+        return stats;
     }
 
-    public List<Integer> findVbTrueResByMuni(String muniCode) {
-//        List<?> list = Arrays.asList(residentRepository.countResidentVbTrueByMuni(muniCode));
-//        for (Object test:list){
-//            System.out.println(test[0]);
-//        }
-        List<Integer> list = new ArrayList<>();
-        for (Integer x : residentRepository.countResidentVbTrueByMuni(muniCode)){
-            System.out.println(x);
-            list.add(x);
-        }
+    public LocationStats findVbTrueResByMuni(String muniCode) {
+        LocationStats stats = new LocationStats(
+                residentRepository.countTotalByMuni(muniCode)
+                ,residentRepository.countTotalVbByMuni(muniCode));
 
-        return list;
+        return stats;
     }
 }
 

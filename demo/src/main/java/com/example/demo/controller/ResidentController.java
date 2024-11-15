@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.LocationStats;
 import com.example.demo.model.Resident;
 import com.example.demo.service.ResidentLocService;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class ResidentController {
     }
 
     @GetMapping("/vb/{brgyCode}")
-    public Integer findVbTrueResByBrgy(@PathVariable("brgyCode") String brgyCode){
+    public LocationStats findVbTrueResByBrgy(@PathVariable("brgyCode") String brgyCode){
         return resLocService.findVbTrueResByBrgy(brgyCode);
     }
 
@@ -39,7 +40,7 @@ public class ResidentController {
     }
 
     @GetMapping("/muni/vb/{muniCode}")
-    public List<Integer> findVbTrueResByMuni(@PathVariable("muniCode") String muniCode){
+    public LocationStats findVbTrueResByMuni(@PathVariable("muniCode") String muniCode){
 
         return resLocService.findVbTrueResByMuni(muniCode);
     }
