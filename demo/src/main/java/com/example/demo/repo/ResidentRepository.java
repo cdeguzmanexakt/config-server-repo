@@ -2,6 +2,8 @@ package com.example.demo.repo;
 
 import com.example.demo.model.Resident;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,5 +11,23 @@ import java.util.List;
 @Repository
 public interface ResidentRepository extends JpaRepository<Resident,String> {
 
-    List<Resident> findByBrgyCode(int brgyCode);
+    List<Resident> findByBrgyCode(String brgyCode);
+
+    List<Resident> findByMuniCode(String muniCode);
+
+    @Query(value = "SELECT * FROM resident WHERE UPPER(brgy_code) LIKE CONCAT('%',UPPER(:brgyCode),'%')",nativeQuery = true)
+    List<Resident> findByLikeBrgyCode(@Param("brgyCode") String brgyCode);
+
+    @Query(value = "SELECT COUNT(id) FROM resident" +
+            " WHERE UPPER(brgy_code) LIKE CONCAT('%',UPPER(:brgyCode),'%')" +
+            " AND vb_flag = true",nativeQuery = true)
+    Integer countResidentVbTrue(@Param("brgyCode") String brgyCode);
+
+    @Query(value = "SELECT * FROM resident WHERE UPPER(muni_code) LIKE CONCAT('%',UPPER(:muniCode),'%')",nativeQuery = true)
+    List<Resident> findByLikeMuniCode(@Param("muniCode") String muniCode);
+
+    @Query(value = "SELECT new List<Integer>(SELECT COUNT(id) FROM resident), COUNT(id) FROM resident" +
+            " WHERE UPPER(muni_code) LIKE CONCAT('%',UPPER(:muniCode),'%')" +
+            " AND vb_flag = true",nativeQuery = true)
+    Integer[] countResidentVbTrueByMuni(@Param("muniCode") String muniCode);
 }
