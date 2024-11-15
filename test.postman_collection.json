@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "087162fe-ecf0-4702-bca9-ceff552afc70",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2768941"
+	},
+	"item": [
+		{
+			"name": "imports",
+			"item": [
+				{
+					"name": "exportResident",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/import/resident",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"import",
+								"resident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postMuni",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/export",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"export"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exportBrgy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/import/brgy",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"import",
+								"brgy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "resident",
+			"item": [
+				{
+					"name": "getResiByBrgy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/resident/barangay",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"resident",
+								"barangay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "countVbByBrgy",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getResident",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/import/resident",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"import",
+								"resident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByMuniVb",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getByMuni",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getMuni",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/import/muni",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"import",
+						"muni"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getbrgy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/import/brgy",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"import",
+						"brgy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
