@@ -2,24 +2,45 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Resident;
 import com.example.demo.service.ResidentLocService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/resident")
 public class ResidentController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResidentController.class);
     @Autowired
     private ResidentLocService resLocService;
 
 
-    @GetMapping("/{brgyId}")
-    public List<Resident> findAllResByBrgy(@PathVariable("brgyId") int brgyId){
-        return resLocService.findResByBrgy(brgyId);
+    @GetMapping("/{brgyCode}")
+    public List<Resident> findAllResByBrgy(@PathVariable("brgyCode") String brgyCode){
+        return resLocService.findAllByBrgyCode2(brgyCode);
     }
+
+    @GetMapping("/vb/{brgyCode}")
+    public Integer findVbTrueResByBrgy(@PathVariable("brgyCode") String brgyCode){
+        return resLocService.findVbTrueResByBrgy(brgyCode);
+    }
+
     @PostMapping
-    public Object importResidentData(){
-        return resLocService.importResident();
+    public void importResidentData() throws Exception {
+//         resLocService.readExcelUsingEventAPI();
+    }
+
+    @GetMapping("/muni/{muniCode}")
+    public List<Resident> findAllResByMuni(@PathVariable("muniCode") String muniCode){
+        return resLocService.findAllByMuniCode2(muniCode);
+    }
+
+    @GetMapping("/muni/vb/{muniCode}")
+    public List<Integer> findVbTrueResByMuni(@PathVariable("muniCode") String muniCode){
+
+        return resLocService.findVbTrueResByMuni(muniCode);
     }
 }
