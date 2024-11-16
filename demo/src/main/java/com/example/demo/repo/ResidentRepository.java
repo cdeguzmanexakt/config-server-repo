@@ -37,6 +37,18 @@ public interface ResidentRepository extends JpaRepository<Resident,Long> {
             "AND vb_flag = true", nativeQuery = true)
     Integer countTotalVbByMuni(@Param("muniCode") String muniCode);
     
+    @Query(value = "SELECT COUNT(id) FROM resident", nativeQuery = true)
+    Integer countTotal();
+    
+    @Query(value = "SELECT COUNT(id) FROM resident WHERE vb_flag = true", nativeQuery = true)
+    Integer countTotalVb();
+    
+    
+    
+
+    
+   
+    
     Resident findByFirstNameAndLastNameAndMobileNumAndAge(String firstName, String lastName, String mobileNum, int age);
 
 

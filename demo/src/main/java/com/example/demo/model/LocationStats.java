@@ -12,6 +12,9 @@ public class LocationStats {
 
     private Integer totalRes;
     private Integer totalVb;
+//    private Integer totalRegistered;
+//    private Integer totalNotRegistered;
+    private String percentage;
 
 
 }

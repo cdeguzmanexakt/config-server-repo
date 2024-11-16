@@ -1,20 +1,19 @@
 package com.example.demo.service;
 
+import java.text.DecimalFormat;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.example.demo.model.LocationStats;
 import com.example.demo.model.Resident;
 import com.example.demo.repo.ResidentRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 
 @Service
 public class ResidentLocService {
 
     private final ResidentRepository residentRepository;
+    DecimalFormat dec = new DecimalFormat("#0.00");
 
     public ResidentLocService(ResidentRepository residentRepository) {
         this.residentRepository = residentRepository;
@@ -37,18 +36,32 @@ public class ResidentLocService {
     }
 
     public LocationStats findVbTrueResByBrgy(String brgyCode) {
-        LocationStats stats = new LocationStats(
-                residentRepository.countTotalByBrgy(brgyCode)
-                ,residentRepository.countTotalVbByBrgy(brgyCode));
+    	
+        return buildLocStats(residentRepository.countTotalByBrgy(brgyCode), 
+        		residentRepository.countTotalVbByBrgy(brgyCode));
 
-        return stats;
+    }
+    
+    public LocationStats getOverAllStats() {
+    	
+    	return buildLocStats(residentRepository.countTotal(), 
+        		residentRepository.countTotalVb());
     }
 
     public LocationStats findVbTrueResByMuni(String muniCode) {
-        LocationStats stats = new LocationStats(
-                residentRepository.countTotalByMuni(muniCode)
-                ,residentRepository.countTotalVbByMuni(muniCode));
 
+        return buildLocStats(residentRepository.countTotalByMuni(muniCode), 
+        		residentRepository.countTotalVbByMuni(muniCode));
+    }
+    
+    private LocationStats buildLocStats(Integer totalRes, Integer totalVb) {
+    	String percentage = "0%";
+    	if(totalRes != null && totalRes != 0) {
+    		Double perc =  (((double) totalVb/(double) totalRes)*100);
+    		percentage = dec.format(perc) + "%";
+    	}
+    	
+        LocationStats stats = new LocationStats(totalRes,totalVb,percentage);
         return stats;
     }
 }

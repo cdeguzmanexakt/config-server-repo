@@ -35,7 +35,7 @@ public class ResidentProfileService {
 
 		Resident test = residentRepo.findByFirstNameAndLastNameAndMobileNumAndAge(req.getFirstName(), req.getLastName(),
 				req.getMobileNum(), req.getAge());
-		
+			
 		return test == null ? false : true;
 	}
 
