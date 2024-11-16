@@ -36,6 +36,8 @@ public interface ResidentRepository extends JpaRepository<Resident,Long> {
     @Query(value = "SELECT COUNT(id) FROM resident WHERE UPPER(muni_code) LIKE CONCAT('%',UPPER(:muniCode),'%') " +
             "AND vb_flag = true", nativeQuery = true)
     Integer countTotalVbByMuni(@Param("muniCode") String muniCode);
+    
+    Resident findByFirstNameAndLastNameAndMobileNumAndAge(String firstName, String lastName, String mobileNum, int age);
 
 
 

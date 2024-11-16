@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import org.apache.poi.ss.usermodel.Row;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
 @Entity
@@ -15,16 +17,27 @@ import java.math.BigDecimal;
 public class Resident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty
     private Long id;
+    @JsonProperty
     private String mobileNum;
+    @JsonProperty
     private String firstName;
+    @JsonProperty
     private String lastName;
+    @JsonProperty
     private String middleName;
+    @JsonProperty
     private int age;
+    @JsonProperty
     private String gender;
+    @JsonProperty
     private boolean isVoter;
+    @JsonProperty
     private boolean vbFlag;
+    @JsonProperty
     private String brgyCode;
+    @JsonProperty
     private String muniCode;
 
     public Resident buildResident(Row row){

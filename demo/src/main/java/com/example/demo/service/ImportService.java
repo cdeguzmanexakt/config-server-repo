@@ -26,6 +26,7 @@ public class ImportService {
     private final ResidentRepository residentRepo;
     @Value("${import.file.path}")
     String baseFilePath;
+	private Workbook wb;
 
     public ImportService(MunicipalityRepository muniRepo, BarangayRepo brgyRepo, ResidentRepository residentRepo) {
         this.muniRepo = muniRepo;
@@ -47,24 +48,20 @@ public class ImportService {
     public boolean importResident() {
         List<Resident> residentList = new ArrayList<>();
         try {
-//            FileInputStream fis = new FileInputStream("D:\\Downloads\\demo\\src\\main\\resources\\assets\\residentsImport.xlsx");
             FileInputStream fis = new FileInputStream(baseFilePath+"residentsImport.xlsx");
-            Workbook wb = new XSSFWorkbook(fis);
+            wb = new XSSFWorkbook(fis);
             Sheet sheet = wb.getSheetAt(0);
             if (sheet != null) {
                 for (Row row : sheet) {
                     if (row.getRowNum() > 0) {
 
-                       // try {
                             Resident resident = new Resident();
                             residentList.add(resident.buildResident(row));
-                        //} catch (Exception e) {
-//                            throw new RuntimeException("There was an error importing the data");
-//                        }
 
                     }
                 }
                 residentRepo.saveAll(residentList);
+                wb.close();
                 return true;
             } else {
                 System.out.println("sheet null");
@@ -76,13 +73,13 @@ public class ImportService {
 
         return false;
     }
+    
 
     public boolean importBrgy() {
         List<Barangay> brgyList = new ArrayList<>();
         try {
-//            FileInputStream fis = new FileInputStream("D:/Downloads/demo/src/main/resources/assets/refbrgy.xlsx");
             FileInputStream fis = new FileInputStream(baseFilePath+"refbrgy.xlsx");
-            Workbook wb = new XSSFWorkbook(fis);
+            wb = new XSSFWorkbook(fis);
             Sheet sheet = wb.getSheetAt(0);
             if (sheet != null) {
                 for (Row row : sheet) {
@@ -98,6 +95,7 @@ public class ImportService {
                     }
                 }
                 brgyRepo.saveAll(brgyList);
+                wb.close();
                 return true;
             } else {
                 System.out.println("sheet null");
@@ -114,7 +112,7 @@ public class ImportService {
         List<Municipality> muniList = new ArrayList<>();
         try {
             FileInputStream fis = new FileInputStream(baseFilePath+"mun.xlsx");
-            Workbook wb = new XSSFWorkbook(fis);
+            wb = new XSSFWorkbook(fis);
             Sheet sheet = wb.getSheetAt(0);
             if (sheet != null) {
                 for (Row row : sheet) {
@@ -130,6 +128,7 @@ public class ImportService {
 
                 }
                 muniRepo.saveAll(muniList);
+                wb.close();
                 return true;
             } else {
                 System.out.println("sheet null");
