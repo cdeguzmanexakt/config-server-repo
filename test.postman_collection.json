@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "087162fe-ecf0-4702-bca9-ceff552afc70",
+		"_postman_id": "6bc98ef5-5d7e-4c03-833d-8d3516a969ea",
 		"name": "test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "2768941"
+		"_exporter_id": "39416292"
 	},
 	"item": [
 		{
@@ -34,13 +34,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/export",
+							"raw": "localhost:8080/import",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"export"
+								"import"
 							]
 						}
 					},
@@ -71,6 +71,67 @@
 			"name": "resident",
 			"item": [
 				{
+					"name": "update",
+					"item": [
+						{
+							"name": "ResidentUpdate",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\": 4482,\r\n        \"mobileNum\": \"9191239048\",\r\n        \"firstName\": \"Janice\",\r\n        \"lastName\": \"Hart\",\r\n        \"middleName\": \"\",\r\n        \"age\": 27,\r\n        \"gender\": \"F\",\r\n        \"vbFlag\": true,\r\n        \"brgyCode\": \"Barangay 4 (Pob.)\",\r\n        \"muniCode\": \"41005\",\r\n        \"voter\": false\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/import/resident",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"import",
+										"resident"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ResidentCreate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n       \r\n        \"mobileNum\": \"9191239048\",\r\n        \"firstName\": \"Janice\",\r\n        \"lastName\": \"Hart\",\r\n        \"middleName\": \"\",\r\n        \"age\": 27,\r\n        \"gender\": \"F\",\r\n        \"vbFlag\": true,\r\n        \"brgyCode\": \"Barangay 4 (Pob.)\",\r\n        \"muniCode\": \"41005\",\r\n        \"voter\": false\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/resident/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"resident",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "getResiByBrgy",
 					"request": {
 						"method": "GET",
@@ -93,7 +154,19 @@
 					"name": "countVbByBrgy",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/resident/vb/barangay",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"resident",
+								"vb",
+								"barangay"
+							]
+						}
 					},
 					"response": []
 				},
@@ -120,7 +193,20 @@
 					"name": "getByMuniVb",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/resident/muni/vb/41",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"resident",
+								"muni",
+								"vb",
+								"41"
+							]
+						}
 					},
 					"response": []
 				},
@@ -128,7 +214,19 @@
 					"name": "getByMuni",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/resident/muni/41034",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"resident",
+								"muni",
+								"41034"
+							]
+						}
 					},
 					"response": []
 				}
