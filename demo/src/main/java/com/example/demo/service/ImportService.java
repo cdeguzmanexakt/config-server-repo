@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
@@ -23,6 +24,8 @@ public class ImportService {
     private final MunicipalityRepository muniRepo;
     private final BarangayRepo brgyRepo;
     private final ResidentRepository residentRepo;
+    @Value("${import.file.path}")
+    String baseFilePath;
 
     public ImportService(MunicipalityRepository muniRepo, BarangayRepo brgyRepo, ResidentRepository residentRepo) {
         this.muniRepo = muniRepo;
@@ -44,8 +47,8 @@ public class ImportService {
     public boolean importResident() {
         List<Resident> residentList = new ArrayList<>();
         try {
-            //FileInputStream fis = new FileInputStream("../../../../../resources/assets/residentsImport.xlsx");
-            FileInputStream fis = new FileInputStream("D:\\Downloads\\demo\\src\\main\\resources\\assets\\residentsImport.xlsx");
+//            FileInputStream fis = new FileInputStream("D:\\Downloads\\demo\\src\\main\\resources\\assets\\residentsImport.xlsx");
+            FileInputStream fis = new FileInputStream(baseFilePath+"residentsImport.xlsx");
             Workbook wb = new XSSFWorkbook(fis);
             Sheet sheet = wb.getSheetAt(0);
             if (sheet != null) {
@@ -77,7 +80,8 @@ public class ImportService {
     public boolean importBrgy() {
         List<Barangay> brgyList = new ArrayList<>();
         try {
-            FileInputStream fis = new FileInputStream("D:/Downloads/demo/src/main/resources/assets/refbrgy.xlsx");
+//            FileInputStream fis = new FileInputStream("D:/Downloads/demo/src/main/resources/assets/refbrgy.xlsx");
+            FileInputStream fis = new FileInputStream(baseFilePath+"refbrgy.xlsx");
             Workbook wb = new XSSFWorkbook(fis);
             Sheet sheet = wb.getSheetAt(0);
             if (sheet != null) {
@@ -109,7 +113,7 @@ public class ImportService {
     public boolean importMuni() {
         List<Municipality> muniList = new ArrayList<>();
         try {
-            FileInputStream fis = new FileInputStream("D:/Downloads/demo/src/main/resources/assets/mun.xlsx");
+            FileInputStream fis = new FileInputStream(baseFilePath+"mun.xlsx");
             Workbook wb = new XSSFWorkbook(fis);
             Sheet sheet = wb.getSheetAt(0);
             if (sheet != null) {

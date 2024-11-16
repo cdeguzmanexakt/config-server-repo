@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ResidentRepository extends JpaRepository<Resident,String> {
+public interface ResidentRepository extends JpaRepository<Resident,Long> {
 
     List<Resident> findByBrgyCode(String brgyCode);
 
