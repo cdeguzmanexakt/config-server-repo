@@ -148,6 +148,10 @@ public class ImportService {
     public List<Barangay> getAllBarangay() {
         return brgyRepo.findAll();
     }
+    
+    public List<Barangay> getAllBarangayByMuni(Integer muniCode) {
+        return brgyRepo.findAllByCityCode(muniCode);
+    }
 
     public Object getAllResident() {
         return residentRepo.findAll();
