@@ -6,6 +6,8 @@ import com.example.demo.model.Resident;
 import com.example.demo.repo.BarangayRepo;
 import com.example.demo.repo.MunicipalityRepository;
 import com.example.demo.repo.ResidentRepository;
+
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -54,10 +56,11 @@ public class ImportService {
             if (sheet != null) {
                 for (Row row : sheet) {
                     if (row.getRowNum() > 0) {
-
-                            Resident resident = new Resident();
+                    	
+                    	if(!(row.getCell(0) == null || row.getCell(0).getCellType() == CellType.BLANK)) {
+                    		Resident resident = new Resident();
                             residentList.add(resident.buildResident(row));
-
+                    	}
                     }
                 }
                 residentRepo.saveAll(residentList);
@@ -86,8 +89,12 @@ public class ImportService {
                     if (row.getRowNum() > 0) {
                         if (410 == row.getCell(4).getNumericCellValue()) {
                             try {
-                                Barangay bg = new Barangay();
-                                brgyList.add(bg.buildBrgy(row));
+                            	
+                            	if(!(row.getCell(0) == null || row.getCell(0).getCellType() == CellType.BLANK)) {
+                            		Barangay bg = new Barangay();
+                                    brgyList.add(bg.buildBrgy(row));
+                            	}
+                                
                             } catch (Exception e) {
                                 throw new RuntimeException("There was an error importing the data");
                             }
@@ -119,7 +126,11 @@ public class ImportService {
                     if (row.getRowNum() > 0) {
                         if (410 == row.getCell(4).getNumericCellValue()) {
                             try {
-                                muniList.add(buildMuni(row));
+                            	
+                            	if(!(row.getCell(0) == null || row.getCell(0).getCellType() == CellType.BLANK)) {
+                            		muniList.add(buildMuni(row));
+                            	}
+                                
                             } catch (Exception e) {
                                 throw new RuntimeException("There was an error importing the data");
                             }

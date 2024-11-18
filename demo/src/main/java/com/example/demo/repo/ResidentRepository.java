@@ -40,6 +40,7 @@ public interface ResidentRepository extends JpaRepository<Resident,Long> {
     @Query(value = "SELECT COUNT(id) FROM resident", nativeQuery = true)
     Integer countTotal();
     
+    
     @Query(value = "SELECT COUNT(id) FROM resident WHERE vb_flag = true", nativeQuery = true)
     Integer countTotalVb();
     

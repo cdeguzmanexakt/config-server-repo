@@ -12,24 +12,28 @@ import com.example.demo.service.ResidentLocService;
 @RestController
 @RequestMapping("/stats")
 public class StatsController {
-	
-	 @Autowired
-	 private ResidentLocService resLocService;
-	
+
+	@Autowired
+	private ResidentLocService resLocService;
+
 	@GetMapping("/overall")
 	public LocationStats getOverallStats() {
 		return resLocService.getOverAllStats();
 	}
-	
-	@GetMapping("/muni/{muniCode}")
-    public LocationStats getStatsByMuni(@PathVariable("muniCode") String muniCode){
 
-        return resLocService.findVbTrueResByMuni(muniCode);
-    }
-	
-	 @GetMapping("/{brgyCode}")
-	    public LocationStats getStatsByBrgy(@PathVariable("brgyCode") String brgyCode){
-	        return resLocService.findVbTrueResByBrgy(brgyCode);
-	 }
+	@GetMapping("/muni/{muniCode}")
+	public LocationStats getStatsByMuni(@PathVariable("muniCode") String muniCode) {
+		return resLocService.findVbTrueResByMuni(muniCode);
+	}
+
+	@GetMapping("/{brgyCode}")
+	public LocationStats getStatsByBrgy(@PathVariable("brgyCode") String brgyCode) {
+		return resLocService.findVbTrueResByBrgy(brgyCode);
+	}
+
+	@GetMapping("/percent-per-muni")
+	public Object percentPerMuniData() {
+		return resLocService.percLocation();
+	}
 
 }
