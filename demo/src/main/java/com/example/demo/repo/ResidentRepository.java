@@ -1,13 +1,12 @@
 package com.example.demo.repo;
 
-import com.example.demo.model.LocationStats;
-import com.example.demo.model.Resident;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
+import com.example.demo.model.Resident;
 
 @Repository
 public interface ResidentRepository extends JpaRepository<Resident,Long> {
@@ -18,6 +17,10 @@ public interface ResidentRepository extends JpaRepository<Resident,Long> {
 
     @Query(value = "SELECT * FROM resident WHERE UPPER(brgy_code) LIKE CONCAT('%',UPPER(:brgyCode),'%')",nativeQuery = true)
     List<Resident> findByLikeBrgyCode(@Param("brgyCode") String brgyCode);
+
+    @Query(value = "SELECT * FROM resident WHERE UPPER(brgy_code) LIKE CONCAT('%',UPPER(:brgyCode),'%') " +
+            "AND UPPER(muni_code) LIKE CONCAT('%',UPPER(:muniCode),'%')",nativeQuery = true)
+    List<Resident> findByLikeMuniCodeAndBrgyCode(@Param("muniCode") String muniCode, @Param("brgyCode") String brgyCode);
 
     @Query(value = "SELECT COUNT(id) FROM resident" +
             " WHERE UPPER(brgy_code) LIKE CONCAT('%',UPPER(:brgyCode),'%')" +

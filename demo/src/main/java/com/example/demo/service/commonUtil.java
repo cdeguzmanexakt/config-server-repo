@@ -6,6 +6,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.eventusermodel.XSSFReader;
 import org.apache.poi.xssf.model.SharedStringsTable;
@@ -91,51 +92,6 @@ public class commonUtil {
     }
 
     public boolean importResident() {
-//        List<Resident> residentList = new ArrayList<>();
-//        IOUtils.setByteArrayMaxOverride(1000000000);
-//        try {
-//
-//            FileInputStream fis = new FileInputStream("D:/Downloads/demo/src/main/resources/assets/mun.xlsx");
-//            Workbook wb = new SXSSFWorkbook(new XSSFWorkbook(fis));
-//            Sheet sheet = wb.getSheetAt(1);
-//            int lastRow = sheet.getLastRowNum();
-//            System.out.println(lastRow + "+++++++++++++++++++++=");
-//            if(sheet != null) {
-//                for (int i = 0; i < 10000; i++) {
-//                    Row row = sheet.getRow(i);
-//
-//                    if (row.getRowNum() > 0 && !checkIfCellisBlank(row.getCell(0))) {
-//                        try {
-//                            Resident res = new Resident();
-//                            res.setMobileNum(BigDecimal.valueOf(row.getCell(0).getNumericCellValue()).toPlainString());
-//                            res.setFirstName(row.getCell(1).getStringCellValue());
-//                            res.setLastName(row.getCell(2).getStringCellValue());
-//                            res.setVbFlag(false);
-//                            res.setVoter(true);
-//                            res.setBrgyCode((int) row.getCell(8).getNumericCellValue());
-//                            res.setMuniCode((int) row.getCell(9).getNumericCellValue());
-//                            residentList.add(res);
-//
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                            System.out.println(row.getRowNum());
-//                            return false;
-//                        }
-//                    }
-//                }
-//
-//                resRepo.saveAll(residentList);
-//                System.out.println("size " + residentList.size());
-//                wb.close();
-//                return true;
-//            }else {
-//                System.out.println("sheet null");
-//                wb.close();
-//            }
-//            wb.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         return false;
     }
 
@@ -183,5 +139,14 @@ public class commonUtil {
             }
 
         }
+    }
+
+    public static boolean isEmptyCell(Cell cell){
+        if(cell == null || cell.getCellType() == CellType.BLANK){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }

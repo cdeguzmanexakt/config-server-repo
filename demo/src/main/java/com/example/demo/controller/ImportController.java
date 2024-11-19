@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.ImportService;
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import com.example.demo.service.ImportService;
+import com.example.demo.service.ScanService;
 
 @RestController
 @RequestMapping(value = "/import")
@@ -21,6 +22,9 @@ public class ImportController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ImportController.class);
     @Autowired
     private ImportService importService;
+
+    @Autowired
+    private ScanService scanService;
 
     @PostMapping
     public Object importMuniData(){
@@ -61,6 +65,17 @@ public class ImportController {
     public ResponseEntity<Object> getAllResident(){
         LOGGER.info("Start get all resident");
         return ResponseEntity.status(HttpStatus.OK).body(importService.getAllResident());
+    }
+
+    @PostMapping("scan-and-update")
+    public String scanAndUpdate(){
+        try {
+            scanService.processFiles();
+            return "done";
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+
     }
 
 }
