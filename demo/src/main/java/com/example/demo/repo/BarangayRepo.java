@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 public interface BarangayRepo extends JpaRepository<Barangay,Integer> {
 	
 	List<Barangay> findAllByCityCode(Integer muniCode);
+
+	List<Barangay> findAllByCityDesc(String muniCode);
 	
 
 }
