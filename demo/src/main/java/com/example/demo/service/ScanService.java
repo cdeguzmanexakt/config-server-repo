@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class ScanService {
 
-    private static final String DIRECTORY_TO_SCAN = "D:\\test\\VBtest\\ForUpdating";
+    private static final String DIRECTORY_TO_SCAN = "C:\\test\\VBtest\\ForUpdating";
     private static final String FILE_PATTERN = ".*ELBAT2024.*\\.xlsx";
     @Autowired
     private ResidentRepository residentRepo;

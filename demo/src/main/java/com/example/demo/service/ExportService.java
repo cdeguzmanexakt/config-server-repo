@@ -79,11 +79,11 @@ public class ExportService {
             }
         }
         System.out.println(muniCode + "+++++++++++++++++++==");
-        File exportDir = new File("D:\\test\\VBtest\\"+muniCode);
+        File exportDir = new File("C:/test/VBtest/"+muniCode);
         if(!exportDir.exists()){
             exportDir.mkdir();
         }
-        FileOutputStream outputStream = new FileOutputStream(new File("D:\\test\\VBtest\\"+muniCode+
+        FileOutputStream outputStream = new FileOutputStream(new File("C:\\test\\VBtest\\"+muniCode+
                 "\\ELBAT2024_"+brgyCode+".xlsx"));
         wb.write(outputStream);
         wb.close();

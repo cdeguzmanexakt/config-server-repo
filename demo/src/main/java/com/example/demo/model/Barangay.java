@@ -21,6 +21,7 @@ public class Barangay {
         brgy.setBrgyCode((int) row.getCell(1).getNumericCellValue());
         brgy.setCityCode((int) row.getCell(5).getNumericCellValue());
         brgy.setBrgyDesc(row.getCell(2).getStringCellValue());
+        brgy.setCityDesc(row.getCell(6).getStringCellValue());
 
         return brgy;
     }

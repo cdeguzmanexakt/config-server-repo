@@ -40,9 +40,12 @@ public class ImportController {
     @PostMapping("/resident")
     public Object importResidentData(){
         LOGGER.info("Start Resident import");
-        return importService.importResident();
+        try {
+        	return importService.importResident();
+		} catch (Exception e) {
+			return e.getMessage();
+		}
     }
-
     @GetMapping("/muni")
     public ResponseEntity<Object> getAllMunicipality(){
         LOGGER.info("Start get all municipality");
